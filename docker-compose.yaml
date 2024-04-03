@@ -27,32 +27,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
 
-  # elt_script:
-  #   build:
-  #     context: ./elt # Directory containing the Dockerfile and elt_script.py
-  #     dockerfile: Dockerfile # Name of the Dockerfile, if it's something other thban "Dockerfile", specify here
-  #   command: ["python", "elt_script.py"]
-  #   networks:
-  #     - elt_network
-  #   depends_on:
-  #     - source_postgres
-  #     - destination_postgres
-
-  # dbt:
-  #   image: ghcr.io/dbt-labs/dbt-postgres:1.4.7
-  #   command: ["run", "--profiles-dir", "/root", "--project-dir", "/dbt"]
-  #   networks:
-  #     - elt_network
-  #   volumes:
-  #     - ./custom_postgres:/dbt
-  #     - ~/.dbt:/root
-  #   depends_on:
-  #     elt_script:
-  #       condition: service_completed_successfully
-  #   environment:
-  #     DBT_PROFILE: default
-  #     DBT_TARGET: dev
-
   postgres: # store the meta-data of air-flow in postgres
     image: postgres:latest
     networks:
